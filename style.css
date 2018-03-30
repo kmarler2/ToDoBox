@@ -1,1 +1,88 @@
-CSS page
+
+* {
+  font-family: 'Roboto Slab', serif;
+}
+
+section {
+  background-color: #E5F3F2;
+
+  
+  
+}
+
+.container {
+  
+}
+
+img {
+  width: 20px;
+  height: 20px;
+}
+
+span {
+  font-size: 75px;
+  font-weight: 700;
+  
+
+}
+
+input button {
+  display: block;
+  margin: 0 auto;
+}
+
+.idea {
+  color: #00A79D;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  text-align: center;
+}
+
+.box {
+  color: #6D6E71;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  text-align: center;
+}
+
+.save {
+  background-color: #00A79D;
+  color: #FFF;
+  text-align: center;
+}
+
+.save:hover{
+  background-color: #045E55
+}
+
+h4 {
+  color: #6D6E71;
+}
+
+.delete-button:hover {
+  content: url(FEE-ideabox-icon-assets/delete-hover.svg);
+}
+
+.description {
+  color: #939598;
+}
+
+.upvote:hover {
+  content: url(FEE-ideabox-icon-assets/upvote-hover.svg);
+}
+
+.downvote:hover {
+  content: url(FEE-ideabox-icon-assets/downvote-hover.svg);
+}
+
+.quality-line {
+  display: inline;
+}
+
+.quality {
+  color: #6D6E71;
+}
+
+hr {
+  color: #D1D3D4;
+}
