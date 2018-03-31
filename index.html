@@ -1,44 +1,44 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>IdeaBox</title>
-  <link rel="stylesheet" type="text/css" href="style.css">
-  <link rel="stylesheet" type="text/css" href="script.js">
-  <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" rel="stylesheet">
+ <title>IdeaBox</title>
+ <link rel="stylesheet" type="text/css" href="style.css">
+ <link rel="stylesheet" type="text/css" href="script.js">
+ <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" rel="stylesheet">
 </head>
 <body>
 
-<section class="container">
-  <span class="idea">idea</span><span class="box">box</span>
-  <form action="index_submit" method="get" accept-charset="utf-8">
-    
-  
-  <label for="text" name="Title" value=""> </label>
-  <input id="title" type="" placeholder="Title" name="Title"><br>
-  <label for="text" name="Body" value=""></label>
-  <input id="body" type="" placeholder="Body" name="Body"><br>
-  <button class="save" type="">save</button>
-  </form>
+<section class="container-top">
+ <span class="title-one title">idea</span><span class="title-two title" id="test">box</span>
+ <form action="index_submit" method="get" accept-charset="utf-8">
+   
+ 
+ <label for="text" name="Title" value=""> </label>
+ <input class="input" id="title" type="" placeholder="Title" name="Title"><br>
+ <label for="text" name="Body" value=""></label>
+ <input class="input" id="body" type="" placeholder="Body" name="Body"><br>
+ <button class="save input" type="">save</button>
+ </form>
 </section>
 
 <main>
-  <label for="text" name="Search" value=""></label>
-  <input id="search" type="" placeholder="Search" name="Search">
+ <section class="container-bottom">
+   <label for="text" name="Search" value=""></label>
+   <input id="search" type="" placeholder="Search" name="Search">
 
-  <article>
-    <h4>Example Idea 1</h4><img class="delete-button" src="FEE-ideabox-icon-assets/delete.svg" alt="">
-    <p class="description">Tiramisu carrot cake fruitcake gingerbread bear claw powder icing tootsie roll ice cream.</p>
-    <div class="quality-line">
-    <img class="upvote" src="FEE-ideabox-icon-assets/upvote.svg" alt="">
-    <img class="downvote" src="FEE-ideabox-icon-assets/downvote.svg" alt="">
-    <p class="quality">quality:swill</p>
-    </div>
-  <hr/ >
-  </article>
-  
+   <article class="cards">
+     <h4 class="header">Example Idea 1
+       <img class="delete-button header" src="FEE-ideabox-icon-assets/delete.svg" alt="">
+     </h4>
+     <p class="description">Tiramisu carrot cake fruitcake gingerbread bear claw powder icing tootsie roll ice cream.</p>
+     <div class="quality-line">
+     <img class="upvote" src="FEE-ideabox-icon-assets/upvote.svg" alt="">
+     <img class="downvote" src="FEE-ideabox-icon-assets/downvote.svg" alt="">
+     <p class="quality">quality:swill</p>
+     </div>
+   </article>
+ </section>
 </main>
 
 </body>
 </html>
-
-test
