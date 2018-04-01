@@ -16,6 +16,8 @@ var saveButton = document.querySelector('.save');
 // var thingsToShow = document.querySelector('.container-bottom');
 var deleteButton = document.querySelector('.delete-button');
 var quality = document.querySelector('.quality');
+var i = 0;
+var qualityDisplay = ['quality: swill', 'quality: plausible', 'quality: genius'];
 
 delete
 saveButton.addEventListener('click', addCard);
@@ -23,6 +25,7 @@ saveButton.addEventListener('click', addCard);
 
 $('.container-bottom').on('click', '.delete-button', deleteCard);
 $('.container-bottom').on('click', '.upvote', upvoteChange);
+
 
 
 function addCard(e) {
@@ -59,7 +62,12 @@ function deleteCard() {
 }
 
 function upvoteChange() {
-  this.closest('p')
-}
+  var closest = event.target.closest('p')
+  $('.quality').closest('p').text(qualityDisplay[i]);
+  if (i < 3) {
+    i += 1
+  } 
+};
+
 
 // event listeners
