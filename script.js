@@ -16,6 +16,8 @@ var saveButton = document.querySelector('.save');
 // var thingsToShow = document.querySelector('.container-bottom');
 var deleteButton = document.querySelector('.delete-button');
 var quality = document.querySelector('.quality');
+var ideaQuality = 0;
+var qualityDisplay = ['quality: swill', 'quality: plausible', 'quality: genius'];
 
 delete
 saveButton.addEventListener('click', addCard);
@@ -23,6 +25,8 @@ saveButton.addEventListener('click', addCard);
 
 $('.container-bottom').on('click', '.delete-button', deleteCard);
 $('.container-bottom').on('click', '.upvote', upvoteChange);
+$('.container-bottom').on('click', '.downvote', downVoteChange);
+
 
 
 function addCard(e) {
@@ -59,7 +63,19 @@ function deleteCard() {
 }
 
 function upvoteChange() {
-  this.closest('p')
-}
+  if (ideaQuality <= 1) {
+    ideaQuality++;
+    $(this).closest('.quality-line').find('p')[0].innerHTML = qualityDisplay[ideaQuality];
+  }
+};
+
+function downVoteChange() {
+  if (ideaQuality >= 1) {
+    ideaQuality--;
+    $(this).closest('.quality-line').find('p')[0].innerHTML = qualityDisplay[ideaQuality];
+  }
+};
+
+
 
 // event listeners
