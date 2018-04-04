@@ -12,7 +12,8 @@ body {
 /* Top section */
 .container-top {
  text-align: center;
- height: 180px;
+ height: 218px;
+ padding-top: 1.1rem;
  background-color: #E5F3F2;
 }
 
@@ -27,20 +28,26 @@ input button {
 }
 
 .input {
- width: 65vw;
- height: 22px;
- margin: 5px;
- font-size: .9em;
+ width: 46vw;
+ height: 28px;
+ margin-top: .9rem;
+ font-family: 'Open Sans', sans-serif;
+ color: #D1D3D4;
+ font-size: 1.3em;
+ padding-left: .5rem;
+ border: 1px solid #939598;
 }
 
 .title-one {
  color: #00A79D;
+ font-weight: bold 700;
  padding-top: 30px;
  padding-bottom: 0px;
 }
 
 .title-two {
  color: #6D6E71;
+ font-weight: bold 700;
  padding-top: 0;
  padding-bottom: 0;
 
@@ -50,9 +57,10 @@ input button {
  background-color: #00A79D;
  color: #FFF;
  text-align: center;
- height: 29px;
+ height: 32px;
+ font-family: 'Open Sans', sans-serif;
  font-size: 1em;
- width: 65.5vw;
+ width: 46.5vw;
 }
 
 .save:hover{
@@ -68,11 +76,18 @@ input button {
 
 
 #search {
- width: 65vw;
- height: 20px;
- font-size: .9em;
- margin-top: 5px;
- margin-left: 17.5vw;
+ width: 46vw;
+ height: 28px;
+ font-family: 'Open Sans', sans-serif;
+ color: #D1D3D4;
+ font-size: 1.3em;
+ display: block;
+ margin: 0 auto;
+ margin-top: 1.4rem;
+ padding-left: .5rem;
+ border: 1px solid #939598;
+
+    
 }
 
 
