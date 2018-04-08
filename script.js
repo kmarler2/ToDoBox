@@ -40,7 +40,6 @@ function prependCard(object) {
      <img class="upvote" src="FEE-ideabox-icon-assets/upvote.svg" alt="" role="upvote button">
      <img class="downvote" src="FEE-ideabox-icon-assets/downvote.svg" alt="" role="downvote button">
      <p class="quality">quality:swill</p>
-     </section>
    </article>`;
   $('.container-bottom').prepend(ideaCard);
 }
@@ -52,7 +51,8 @@ function MakeCard(title, body, id, ideaQuality) {
   this.ideaQuality = ideaQuality;
 }
 
-function storeCard(card, key) {
+function storeCard(card) {
+  var key = card.id;
   var stringifyCard = JSON.stringify(card);
   localStorage.setItem(key, stringifyCard);
 }
@@ -68,6 +68,7 @@ function restoreCard() {
 function getCard(cardId) {
   var stringifyCard = localStorage.getItem(cardId);
   var parsedCard = JSON.parse(stringifyCard);
+  console.log(parsedCard);
   return parsedCard;
 }
 
@@ -83,14 +84,13 @@ function deleteCard(id) {
 }
 
 function upvoteChange() {
-  var id = $(event.target).parent().attr("id");
-  console.log(id);
-  var card = getCard(id);
+  var card = getCard($(this).parent('article').attr('id'));
   if (ideaQuality <= 1) {
     ideaQuality++;
-    $(this).closest('.quality-section').find('p')[0].innerHTML = qualityDisplay[ideaQuality];
+    $(this).siblings('.quality').find('p')[0].innerHTML = '';
   }
-  storeCard(card, id);
+  console.log(cardId);
+  storeCard(card);
 };
 
 function downVoteChange() {
