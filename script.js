@@ -1,43 +1,45 @@
-var titleInput = document.querySelector('.input');
-var bodyInput = document.querySelector('#body');
-var saveButton = document.querySelector('.save');
-var deleteButton = document.querySelector('.delete-button-header');
-var quality = document.querySelector('.quality');
 var ideaQuality = 0;
 var qualityDisplay = ['quality: swill', 'quality: plausible', 'quality: genius'];
-var key;
 
-saveButton.addEventListener('click', saveInput);
+$('.save').on('click', saveInput);
 $('.container-bottom').on('click', '.delete-button-header', deleteCard);
 $('.container-bottom').on('click', '.upvote', upvoteChange);
 $('.container-bottom').on('click', '.downvote', downVoteChange);
 $(window).on('load', restoreCard);
+$('form').on('keyup', verifyInput);
+
+function verifyInput() {
+  var title = document.querySelector('.title');
+  var body = document.querySelector('.body');
+  if (title.value !== '' && body.value !== '') {
+    document.querySelector('.save').removeAttribute('disabled');
+  } else {
+    document.querySelector('.save').setAttribute('disabled', '');
+  }
+}
 
 function saveInput(e) {
   e.preventDefault();
-  var title = titleInput.value;
-  var body = bodyInput.value;
+  var title = document.querySelector('.input').value;
+  var body = document.querySelector('.body').value;
   var newCard = new MakeCard(title, body);
   prependCard(newCard);
   clearInput();
   storeCard(newCard);
+  verifyInput();
 }
 
 function prependCard(object) {
   var ideaCard = document.createElement('article');
   ideaCard.innerHTML = `
   <article class="cards" id=${object.id}>
-     <span class="idea-head">
       <img class="delete-button-header" id="delete" src="FEE-ideabox-icon-assets/delete.svg" alt="">
-      <h4 class="header" contenteditable="true">${object.title}</h4></span>
+      <h2 class="header" contenteditable="true">${object.title}</h2></span>
      <p class="description" contenteditable="true">${object.body}</p>
-     <div class="quality-line">
      <img class="upvote" src="FEE-ideabox-icon-assets/upvote.svg" alt="" role="upvote button">
      <img class="downvote" src="FEE-ideabox-icon-assets/downvote.svg" alt="" role="downvote button">
      <p class="quality">quality:swill</p>
-     </div>
-   </article>
-  `;
+   </article>`;
   $('.container-bottom').prepend(ideaCard);
 }
 
@@ -45,11 +47,11 @@ function MakeCard(title, body, id, ideaQuality) {
   this.title = title;
   this.body = body;
   this.id = id || Date.now();
-  this.ideaQuality = ideaQuality || 0;
+  this.ideaQuality = ideaQuality;
 }
 
 function storeCard(newCard) {
-  key = newCard.id;
+  var key = newCard.id;
   var stringifyCard = JSON.stringify(newCard);
   localStorage.setItem(key, stringifyCard);
 }
@@ -63,9 +65,12 @@ function restoreCard() {
 }
 
 function clearInput() {
-  titleInput.value = '';
-  bodyInput.value = '';
+  var inputs = document.querySelector('.form');
+      inputs.reset();
+  console.log(inputs);
 }
+
+
 
 function deleteCard(id) {
   (this).closest('article').remove();
@@ -81,6 +86,7 @@ function upvoteChange() {
 
 function downVoteChange() {
   if (ideaQuality >= 1) {
+    console.log(ideaQuality);
     ideaQuality--;
     $(this).closest('.quality-line').find('p')[0].innerHTML = qualityDisplay[ideaQuality];
   }
