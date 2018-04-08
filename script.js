@@ -36,9 +36,11 @@ function prependCard(object) {
       <img class="delete-button-header" id="delete" src="FEE-ideabox-icon-assets/delete.svg" alt="">
       <h2 class="header" contenteditable="true">${object.title}</h2></span>
      <p class="description" contenteditable="true">${object.body}</p>
+     <section class='quality-section'>
      <img class="upvote" src="FEE-ideabox-icon-assets/upvote.svg" alt="" role="upvote button">
      <img class="downvote" src="FEE-ideabox-icon-assets/downvote.svg" alt="" role="downvote button">
      <p class="quality">quality:swill</p>
+     </section>
    </article>`;
   $('.container-bottom').prepend(ideaCard);
 }
@@ -50,9 +52,8 @@ function MakeCard(title, body, id, ideaQuality) {
   this.ideaQuality = ideaQuality;
 }
 
-function storeCard(newCard) {
-  var key = newCard.id;
-  var stringifyCard = JSON.stringify(newCard);
+function storeCard(card, key) {
+  var stringifyCard = JSON.stringify(card);
   localStorage.setItem(key, stringifyCard);
 }
 
@@ -64,13 +65,17 @@ function restoreCard() {
   }
 }
 
+function getCard(cardId) {
+  var stringifyCard = localStorage.getItem(cardId);
+  var parsedCard = JSON.parse(stringifyCard);
+  return parsedCard;
+}
+
 function clearInput() {
   var inputs = document.querySelector('.form');
       inputs.reset();
   console.log(inputs);
 }
-
-
 
 function deleteCard(id) {
   (this).closest('article').remove();
@@ -78,17 +83,23 @@ function deleteCard(id) {
 }
 
 function upvoteChange() {
+  var id = $(event.target).parent().attr("id");
+  console.log(id);
+  var card = getCard(id);
   if (ideaQuality <= 1) {
     ideaQuality++;
-    $(this).closest('.quality-line').find('p')[0].innerHTML = qualityDisplay[ideaQuality];
+    $(this).closest('.quality-section').find('p')[0].innerHTML = qualityDisplay[ideaQuality];
   }
+  storeCard(card, id);
 };
 
 function downVoteChange() {
+  var card = getCard($(this).parent('.cards'));
   if (ideaQuality >= 1) {
     console.log(ideaQuality);
     ideaQuality--;
-    $(this).closest('.quality-line').find('p')[0].innerHTML = qualityDisplay[ideaQuality];
+    $(this).closest('.quality').find('p')[0].innerHTML = qualityDisplay[ideaQuality];
   }
+  storeCard(card);
 };
 
