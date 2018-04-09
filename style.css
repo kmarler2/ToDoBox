@@ -1,5 +1,3 @@
-  margin: 0;
-}
 
 body {
   height: 90vh;
@@ -7,6 +5,7 @@ body {
 }
 
 /* Top section */
+
 .container-top {
   text-align: center;
   height: 218px;
@@ -91,7 +90,7 @@ article {
 
 }
 
-.quality {
+.inportance {
   color: #6D6E71;
   font-size: 1.1rem;
   margin-bottom: 30px;
@@ -109,17 +108,12 @@ article {
   color: #D1D3D4;
 }
 
-.idea-head {
-  color: #6D6E71;
-  font-size: 1.5em;
-  width: 46vw;
-  padding-bottom: .6rem;
-  padding-left: 0;
-  float: left;
-}
-
 .delete-button-header {
   float: right;
+}
+
+.delete-button-header:hover {
+  content: url(FEE-ideabox-icon-assets/delete-hover.svg);
 }
 
 img {
@@ -132,6 +126,13 @@ p {
   display: inline-block;
 }
 
+.description {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 1.2rem;
+  color: #939598;
+  width: 46vw;
+}
+
 .downvote {
   margin-right: 25px;
   margin-left: 20px;
@@ -142,17 +143,6 @@ p {
   padding-top: 11px;
 }
 
-.delete-button-header:hover {
-  content: url(FEE-ideabox-icon-assets/delete-hover.svg);
-}
-
-.description {
-  font-family: 'Open Sans', sans-serif;
-  font-size: 1.2rem;
-  color: #939598;
-  width: 46vw;
-}
-
 .upvote:hover {
   content: url(FEE-ideabox-icon-assets/upvote-hover.svg);
 }
@@ -161,12 +151,6 @@ p {
   content: url(FEE-ideabox-icon-assets/downvote-hover.svg);
 }
 
-.quality-line {
-  display: flex;
-  width: 46vw;
-  justify-content: flex-start;
-  margin-top: 14px;
-}
 
 @media only screen and (max-width: 440px) {
 

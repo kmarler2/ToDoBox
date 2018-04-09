@@ -1,13 +1,11 @@
-var ideaQuality = 0;
-var qualityDisplay = ['quality: swill', 'quality: plausible', 'quality: genius'];
 
-$('.save').on('click', saveInput);
-$('.container-bottom').on('click', '.delete-button-header', deleteCard);
-$('.container-bottom').on('click', '.upvote', upvoteChange);
-$('.container-bottom').on('click', '.downvote', downVoteChange);
 $(window).on('load', restoreCard);
 $('form').on('keyup', verifyInput);
+$('.save').on('click', saveInput);
 $('.container-bottom').on('blur', '.user-content', saveEditedCard);
+$('.container-bottom').on('click', '.upvote', upvoteChange);
+$('.container-bottom').on('click', '.downvote', downvoteChange);
+$('.container-bottom').on('click', '.delete-button-header', deleteCard);
 $('.search').on('keyup', filterCards);
 
 function verifyInput() {
@@ -25,10 +23,10 @@ function saveInput(e) {
   var title = document.querySelector('.input').value;
   var body = document.querySelector('.body').value;
   var newCard = new MakeCard(title, body);
-  prependCard(newCard);
-  clearInput();
-  storeCard(newCard, newCard.id);
   verifyInput();
+  clearInput();
+  prependCard(newCard);
+  storeCard(newCard, newCard.id);
 };
 
 function prependCard(object) {
@@ -38,10 +36,10 @@ function prependCard(object) {
       <img class="delete-button-header" id="delete" src="FEE-ideabox-icon-assets/delete.svg" alt="">
       <h2 class="header user-content" id="titleText" contenteditable="true">${object.title}</h2></span>
      <p class="description user-content" id="bodyText" contenteditable="true">${object.body}</p>
-     <section class='quality-section'>
+     <section class='importance-section'>
      <img class="upvote" src="FEE-ideabox-icon-assets/upvote.svg" alt="" role="upvote button">
      <img class="downvote" src="FEE-ideabox-icon-assets/downvote.svg" alt="" role="downvote button">
-     <p class="quality">${object.ideaQuality}</p>
+     <p class="importance">${object.importance}</p>
    </article>`;
   $('.container-bottom').prepend(ideaCard);
 };
@@ -62,11 +60,11 @@ function filterCards() {
   }
 }
 
-function MakeCard(title, body, id, ideaQuality) {
+function MakeCard(title, body, id, importance) {
   this.title = title;
   this.body = body;
   this.id = id || Date.now();
-  this.ideaQuality = ideaQuality || 'quality: swill';
+  this.importance = importance || 'importance: normal';
 };
 
 function storeCard(card, id) {
@@ -107,26 +105,29 @@ function saveEditedCard(e) {
 }
 
 function upvoteChange() {
-  debugger
+  var importance = 0;
+  var qualityDisplay = ['importance: none','importance: low','importance: normal', 'importance: high', 'importance: critcal'];
   var id = $(this).closest('article').attr('id');
   var parseCard = getCard(id);
-  if (ideaQuality <= 1) {
-    ideaQuality++;
-    $(this).closest('.quality-section').find('p')[0].innerText = qualityDisplay[ideaQuality];
-    parseCard.ideaQuality = qualityDisplay[ideaQuality]
+  if (importance <= 4) {
+    importance++;
+    $(this).closest('.importance-section').find('p')[0].innerText = qualityDisplay[importance];
+    parseCard.importance = qualityDisplay[importance]
   }
   console.log(parseCard);
   storeCard(parseCard, id);
 };
 
-function downVoteChange() {
+function downvoteChange() {
+  var importance = 0;
+  var qualityDisplay = ['importance: none','importance: low','importance: normal', 'importance: high', 'importance: critcal'];
   var id = $(this).closest('article').attr('id');
   var parseCard = getCard(id);
-  if (ideaQuality >= 1) {
-    console.log(ideaQuality);
-    ideaQuality--;
-    $(this).closest('.quality-section').find('p')[0].innerText = qualityDisplay[ideaQuality];
-    parseCard.ideaQuality = qualityDisplay[ideaQuality]
+  if (importance >= 4) {
+    console.log(importance);
+    importance--;
+    $(this).closest('.importance-section').find('p')[0].innerText = qualityDisplay[importance];
+    parseCard.importance = qualityDisplay[importance]
   }
  storeCard(parseCard, id);
 };
