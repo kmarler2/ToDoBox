@@ -49,12 +49,12 @@ function prependCard(object) {
 function filterCards() {
   var input = document.querySelector('.search').value;
   var uppercaseInput = input.toUpperCase();
-  var container = document.querySelector('.container-bottom');
-  var card = document.querySelectorAll('.cards');
-  var article;
-  for (var i=0; i < card.length; i++) {
-    article = card[i].querySelector(".user-content")[0];
-    if (article.innerHTML.toUpperCase().indexOf(uppercaseInput) > -1) {
+  var card = document.querySelectorAll('article');
+  var userContent;  
+  debugger
+  for (var i = 0; i < card.length; i++) {
+    userContent = card[i].getElementByTagName("h2")[0];
+    if (userContent.innerHTML.toUpperCase().indexOf(uppercaseInput) > -1) {
       card[i].style.display = '';
     } else {
       card[i].style.display = none;
@@ -107,11 +107,13 @@ function saveEditedCard(e) {
 }
 
 function upvoteChange() {
-  var id = $(this).parent('article').attr('id');
+  debugger
+  var id = $(this).closest('article').attr('id');
   var parseCard = getCard(id);
   if (ideaQuality <= 1) {
     ideaQuality++;
     $(this).closest('.quality-section').find('p')[0].innerText = qualityDisplay[ideaQuality];
+    // parseCard.ideaQuality = qualityDisplay[ideaQuality]
   }
   console.log(parseCard);
   storeCard(parseCard, id);
@@ -124,6 +126,7 @@ function downVoteChange() {
     console.log(ideaQuality);
     ideaQuality--;
     $(this).closest('.quality-section').find('p')[0].innerText = qualityDisplay[ideaQuality];
+    parseCard.ideaQuality = qualityDisplay[ideaQuality]
   }
  storeCard(parseCard, id);
 };
