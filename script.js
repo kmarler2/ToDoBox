@@ -7,6 +7,8 @@ $('.container-bottom').on('click', '.upvote', upvoteChange);
 $('.container-bottom').on('click', '.downvote', downVoteChange);
 $(window).on('load', restoreCard);
 $('form').on('keyup', verifyInput);
+$('.container-bottom').on('blur', '.user-content', saveEditedCard);
+$('.search').on('keyup', filterCards);
 
 function verifyInput() {
   var title = document.querySelector('.title');
@@ -16,7 +18,7 @@ function verifyInput() {
   } else {
     document.querySelector('.save').setAttribute('disabled', '');
   }
-}
+};
 
 function saveInput(e) {
   e.preventDefault();
@@ -25,37 +27,52 @@ function saveInput(e) {
   var newCard = new MakeCard(title, body);
   prependCard(newCard);
   clearInput();
-  storeCard(newCard);
+  storeCard(newCard, newCard.id);
   verifyInput();
-}
+};
 
 function prependCard(object) {
   var ideaCard = document.createElement('article');
   ideaCard.innerHTML = `
   <article class="cards" id=${object.id}>
       <img class="delete-button-header" id="delete" src="FEE-ideabox-icon-assets/delete.svg" alt="">
-      <h2 class="header" contenteditable="true">${object.title}</h2></span>
-     <p class="description" contenteditable="true">${object.body}</p>
+      <h2 class="header user-content" id="titleText" contenteditable="true">${object.title}</h2></span>
+     <p class="description user-content" id="bodyText" contenteditable="true">${object.body}</p>
      <section class='quality-section'>
      <img class="upvote" src="FEE-ideabox-icon-assets/upvote.svg" alt="" role="upvote button">
      <img class="downvote" src="FEE-ideabox-icon-assets/downvote.svg" alt="" role="downvote button">
-     <p class="quality">quality:swill</p>
+     <p class="quality">quality: ${object.ideaQuality}</p>
    </article>`;
   $('.container-bottom').prepend(ideaCard);
+};
+
+function filterCards() {
+  var input = document.querySelector('.search').value;
+  var uppercaseInput = input.toUpperCase();
+  var container = document.querySelector('.container-bottom');
+  var card = document.querySelectorAll('.cards');
+  var article;
+  for (var i=0; i < card.length; i++) {
+    article = card[i].querySelector(".user-content")[0];
+    if (article.innerHTML.toUpperCase().indexOf(uppercaseInput) > -1) {
+      card[i].style.display = '';
+    } else {
+      card[i].style.display = none;
+    }
+  }
 }
 
 function MakeCard(title, body, id, ideaQuality) {
   this.title = title;
   this.body = body;
   this.id = id || Date.now();
-  this.ideaQuality = ideaQuality;
-}
+  this.ideaQuality = ideaQuality || 'swill';
+};
 
-function storeCard(card) {
-  var key = card.id;
+function storeCard(card, id) {
   var stringifyCard = JSON.stringify(card);
-  localStorage.setItem(key, stringifyCard);
-}
+  localStorage.setItem(id, stringifyCard);
+};
 
 function restoreCard() {
   for (var i = 0; i < localStorage.length; i++) {
@@ -63,43 +80,51 @@ function restoreCard() {
     var parsedCard = JSON.parse(object);
     prependCard(parsedCard);
   }
-}
+};
 
-function getCard(cardId) {
-  var stringifyCard = localStorage.getItem(cardId);
-  var parsedCard = JSON.parse(stringifyCard);
-  console.log(parsedCard);
-  return parsedCard;
-}
+function getCard(id) {
+  var stringifyCard = localStorage.getItem(id);
+  return JSON.parse(stringifyCard);
+};
 
 function clearInput() {
   var inputs = document.querySelector('.form');
       inputs.reset();
-  console.log(inputs);
-}
+};
 
 function deleteCard(id) {
   (this).closest('article').remove();
   localStorage.removeItem(localStorage.key(this.id))
+};
+
+function saveEditedCard(e) {
+  e.preventDefault();
+  var id = $(this).parent('article').attr('id');
+  var parseCard = getCard(id);
+  parseCard.title = $(this).parent('article').children('#titleText').text();
+  parseCard.body = $(this).parent('article').children('#bodyText').text();
+  storeCard(parseCard, id);
 }
 
 function upvoteChange() {
-  var card = getCard($(this).parent('article').attr('id'));
+  var id = $(this).parent('article').attr('id');
+  var parseCard = getCard(id);
   if (ideaQuality <= 1) {
     ideaQuality++;
-    $(this).siblings('.quality').find('p')[0].innerHTML = '';
+    $(this).closest('.quality-section').find('p')[0].innerText = qualityDisplay[ideaQuality];
   }
-  console.log(cardId);
-  storeCard(card);
+  console.log(parseCard);
+  storeCard(parseCard, id);
 };
 
 function downVoteChange() {
-  var card = getCard($(this).parent('.cards'));
+  var id = $(this).parent('article').attr('id');
+  var parseCard = getCard(id);
   if (ideaQuality >= 1) {
     console.log(ideaQuality);
     ideaQuality--;
-    $(this).closest('.quality').find('p')[0].innerHTML = qualityDisplay[ideaQuality];
+    $(this).closest('.quality-section').find('p')[0].innerText = qualityDisplay[ideaQuality];
   }
-  storeCard(card);
+ storeCard(parseCard, id);
 };
 
