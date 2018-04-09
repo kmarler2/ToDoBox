@@ -41,7 +41,7 @@ function prependCard(object) {
      <section class='quality-section'>
      <img class="upvote" src="FEE-ideabox-icon-assets/upvote.svg" alt="" role="upvote button">
      <img class="downvote" src="FEE-ideabox-icon-assets/downvote.svg" alt="" role="downvote button">
-     <p class="quality">quality: ${object.ideaQuality}</p>
+     <p class="quality">${object.ideaQuality}</p>
    </article>`;
   $('.container-bottom').prepend(ideaCard);
 };
@@ -66,7 +66,7 @@ function MakeCard(title, body, id, ideaQuality) {
   this.title = title;
   this.body = body;
   this.id = id || Date.now();
-  this.ideaQuality = ideaQuality || 'swill';
+  this.ideaQuality = ideaQuality || 'quality: swill';
 };
 
 function storeCard(card, id) {
@@ -113,14 +113,14 @@ function upvoteChange() {
   if (ideaQuality <= 1) {
     ideaQuality++;
     $(this).closest('.quality-section').find('p')[0].innerText = qualityDisplay[ideaQuality];
-    // parseCard.ideaQuality = qualityDisplay[ideaQuality]
+    parseCard.ideaQuality = qualityDisplay[ideaQuality]
   }
   console.log(parseCard);
   storeCard(parseCard, id);
 };
 
 function downVoteChange() {
-  var id = $(this).parent('article').attr('id');
+  var id = $(this).closest('article').attr('id');
   var parseCard = getCard(id);
   if (ideaQuality >= 1) {
     console.log(ideaQuality);
