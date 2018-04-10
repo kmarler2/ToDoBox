@@ -46,16 +46,15 @@ function prependCard(object) {
 
 function filterCards() {
   var input = document.querySelector('.search').value;
-  var uppercaseInput = input.toUpperCase();
-  var card = document.querySelectorAll('article');
-  var userContent;  
-  debugger
-  for (var i = 0; i < card.length; i++) {
-    userContent = card[i].getElementByTagName("h2")[0];
-    if (userContent.innerHTML.toUpperCase().indexOf(uppercaseInput) > -1) {
-      card[i].style.display = '';
+  var card = document.querySelectorAll('.cards');
+  for (i = 0; i < card.length; i++) {
+    card[i].innerText.indexOf(input)
+    console.log(card[i].innerText.indexOf(input))
+    if (card[i].innerText.indexOf(input) > -1) {
+      card[i].removeAttribute("hidden")
+      console.log('bang')
     } else {
-      card[i].style.display = none;
+      card[i].setAttribute("hidden", true)
     }
   }
 }
