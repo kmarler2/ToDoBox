@@ -108,6 +108,10 @@ article {
   color: #D1D3D4;
 }
 
+.completed {
+  opacity: .3;
+}
+
 .delete-button-header {
   float: right;
 }
