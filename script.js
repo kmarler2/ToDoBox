@@ -6,7 +6,9 @@ $('.container-bottom').on('blur', '.user-content', saveEditedCard);
 $('.container-bottom').on('click', '.upvote', upvoteChange);
 $('.container-bottom').on('click', '.downvote', downvoteChange);
 $('.container-bottom').on('click', '.delete-button-header', deleteCard);
+$('.container-bottom').on( "click", '.checkbox' , markCardCompleted);
 $('.search').on('keyup', filterCards);
+
 
 function verifyInput() {
   var title = document.querySelector('.title');
@@ -31,15 +33,17 @@ function saveInput(e) {
 
 function prependCard(object) {
   var ideaCard = document.createElement('article');
-  ideaCard.innerHTML = `
-  <article class="cards" id=${object.id}>
-      <img class="delete-button-header" id="delete" src="FEE-ideabox-icon-assets/delete.svg" alt="">
-      <h2 class="header user-content" id="titleText" contenteditable="true">${object.title}</h2></span>
-     <p class="description user-content" id="bodyText" contenteditable="true">${object.body}</p>
-     <section class='importance-section'>
-     <img class="upvote" src="FEE-ideabox-icon-assets/upvote.svg" alt="" role="upvote button">
-     <img class="downvote" src="FEE-ideabox-icon-assets/downvote.svg" alt="" role="downvote button">
-     <p class="importance">${object.importance}</p>
+  ideaCard.innerHTML = 
+  `<article class="cards" id=${object.id}>
+    <img class="delete-button-header" id="delete" src="FEE-ideabox-icon-assets/delete.svg" alt="">
+    <h2 class="header user-content" id="titleText" contenteditable="true">${object.title}</h2></span>
+    <p class="description user-content" id="bodyText" contenteditable="true">${object.body}</p>
+    <section class='importance-section'>
+    <img class="upvote" src="FEE-ideabox-icon-assets/upvote.svg" alt="" role="upvote button">
+    <img class="downvote" src="FEE-ideabox-icon-assets/downvote.svg" alt="" role="downvote button">
+    <p class="importance">${object.importance}</p>
+    <p>completed</p>
+    <input type="checkbox" class="checkbox">
    </article>`;
   $('.container-bottom').prepend(ideaCard);
 };
@@ -130,4 +134,10 @@ function downvoteChange() {
   }
  storeCard(parseCard, id);
 };
+
+function markCardCompleted() {
+  var card = $(this).closest('article')
+  console.log(card)
+  card.addClass('completed');
+}
 
