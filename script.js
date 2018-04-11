@@ -9,21 +9,26 @@ $('.container-bottom').on('change', '.checkbox', markCardCompleted);
 $('.show-completed').on('click', showCompletedCards);
 $('.search').on('keyup', filterCards);
 $(window).on('load', showMore);
+$('.none').on('click', showLowestImportance);
+$('.low').on('click', showLowImportance);
+$('.normal').on('click', showNormalImportance);
+$('.high').on('click', showHighImportance);
+$('.critical').on('click', showCriticalImportance);
 
 function verifyInput() {
-  var title = document.querySelector('.title');
-  var body = document.querySelector('.body');
+  var title = $('.title');
+  var body = $('.body');
   if (title.value !== '' && body.value !== '') {
-    document.querySelector('.save').removeAttribute('disabled');
+    $('.save').removeAttr('disabled');
   } else {
-    document.querySelector('.save').setAttribute('disabled', '');
+    $('.save').setAttr('disabled', '');
   }
 };
 
 function saveInput(e) {
   e.preventDefault();
-  var title = document.querySelector('.input').value;
-  var body = document.querySelector('.body').value;
+  var title = $('.input').val();
+  var body = $('.body').val();
   var newCard = new MakeCard(title, body);
   verifyInput();
   clearInput();
@@ -33,8 +38,7 @@ function saveInput(e) {
 };
 
 function prependCard(object) {
-  var ideaCard = document.createElement('article');
-  ideaCard.innerHTML = 
+  $('.container-bottom').prepend(
   `<article class="cards" id=${object.id}>
     <img class="delete-button-header" id="delete" src="FEE-ideabox-icon-assets/delete.svg" alt="">
     <h2 class="header user-content" id="titleText" contenteditable="true">${object.title}</h2></span>
@@ -45,23 +49,22 @@ function prependCard(object) {
     <p class="importance">${object.importance}</p>
     <p>completed</p>
     <input type="checkbox" class="checkbox">
-   </article>`;
-  $('.container-bottom').prepend(ideaCard);
+   </article>`)
 };
 
 function filterCards() {
-  var input = document.querySelector('.search').value;
-  var card = document.querySelectorAll('.cards');
-  for (i = 0; i < card.length; i++) {
-    card[i].innerText.indexOf(input)
-    console.log(card[i].innerText.indexOf(input))
-    if (card[i].innerText.indexOf(input) > -1) {
-      card[i].removeAttribute("hidden")
+  var input = $('.search').val();
+  var cards = $('.cards');
+  cards.each(function() {
+    $(this).text().indexOf(input)
+    console.log($(this).text().indexOf(input))
+    if ($(this).text().indexOf(input) > -1) {
+      $(this).show();
     } else {
-      card[i].setAttribute("hidden", true)
-    }
-  }
-}
+      $(this).hide();
+    };
+  });
+};
 
 function MakeCard(title, body, id, importance, completed) {
   this.title = title;
@@ -97,7 +100,7 @@ function clearInput() {
 };
 
 function deleteCard(id) {
-  (this).closest('article').remove();
+  $(this).closest('article').remove();
   localStorage.removeItem(localStorage.key(this.id))
 };
 
@@ -167,3 +170,72 @@ function showCompletedCards() {
     } 
   }
 };  
+
+function showLowestImportance() {
+  for (var i = 0; i < localStorage.length; i++) {
+  var object = localStorage.getItem(localStorage.key(i))
+  var parsedCard = JSON.parse(object);
+  var qualityDisplay = ['importance: none','importance: low','importance: normal', 'importance: high', 'importance: critcal'];
+  var cards = $('.cards');
+  var importance = qualityDisplay.indexOf(parsedCard.importance);
+  cards.each(function() {
+    if (importance === 0) {
+      cards.show();
+    } else {
+      cards.hide();
+    }
+  })
+}};
+
+function showLowImportance() {
+  var qualityDisplay = ['importance: none','importance: low','importance: normal', 'importance: high', 'importance: critcal'];
+  var cards = $('.cards');
+  var importance = qualityDisplay.indexOf(cards.importance);
+  cards.each(function() {
+  if (importance === 1) {
+      cards.show();
+    } else {
+      cards.hide();
+    }
+  })
+};
+
+function showNormalImportance() {
+  var qualityDisplay = ['importance: none','importance: low','importance: normal', 'importance: high', 'importance: critcal'];
+  var cards = $('.cards');
+  var importance = qualityDisplay.indexOf(cards.importance);
+    cards.each(function() {
+  if (importance === 2) {
+      cards.show();
+    } else {
+      cards.hide();
+    }
+  })
+};
+
+function showHighImportance() {
+  var qualityDisplay = ['importance: none','importance: low','importance: normal', 'importance: high', 'importance: critcal'];
+  var cards = $('.cards');
+  var importance = qualityDisplay.indexOf(cards.importance);
+  console.log(importance)
+    cards.each(function() {
+   if (importance === 3) {
+      cards.show();
+    } else {
+      cards.hide();
+    }
+  })
+};
+
+function showCriticalImportance() {
+  var qualityDisplay = ['importance: none','importance: low','importance: normal', 'importance: high', 'importance: critcal'];
+  var cards = $('.cards');
+  var importance = qualityDisplay.indexOf(cards.importance);
+    cards.each(function() {
+   if (importance === 4) {
+      cards.show();
+    } else {
+      cards.hide();
+    }
+  })
+};
