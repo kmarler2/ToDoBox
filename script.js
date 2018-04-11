@@ -67,7 +67,7 @@ function MakeCard(title, body, id, importance, completed) {
   this.title = title;
   this.body = body;
   this.id = Date.now();
-  this.importance = importance || 2;
+  this.importance = importance || 'importance: normal';
   this.completed = false;
 };
 
@@ -111,30 +111,27 @@ function saveEditedCard(e) {
 }
 
 function upvoteChange() {
-  var importance = 2;
   var qualityDisplay = ['importance: none','importance: low','importance: normal', 'importance: high', 'importance: critcal'];
   var id = $(this).closest('article').attr('id');
   var parseCard = getCard(id);
-  if (importance <= 4) {
+  var importance = qualityDisplay.indexOf(parseCard.importance);
+  if (importance < 4) {
     importance++;
-    $(this).closest('.importance-section').find('p')[0].innerText = qualityDisplay[importance];
+    $(this).closest('.importance-section').find('.importance').text(qualityDisplay[importance])
     parseCard.importance = qualityDisplay[importance]
-  }
-  console.log(importance);
-  storeCard(parseCard, id);
+  } storeCard(parseCard, id);
 };
 
 function downvoteChange() {
   var qualityDisplay = ['importance: none','importance: low','importance: normal', 'importance: high', 'importance: critcal'];
   var id = $(this).closest('article').attr('id');
   var parseCard = getCard(id);
-  if (importance >= 4) {
-    console.log(importance);
+  var importance = qualityDisplay.indexOf(parseCard.importance);
+  if (importance > 0) {
     importance--;
-    $(this).closest('.importance-section').find('p')[0].innerText = qualityDisplay[importance];
+    $(this).closest('.importance-section').find('.importance').text(qualityDisplay[importance])
     parseCard.importance = qualityDisplay[importance]
-  }
- storeCard(parseCard, id);
+  } storeCard(parseCard, id);
 };
 
 function markCardCompleted() {

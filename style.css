@@ -1,13 +1,14 @@
 body {
-  height: 90vh;
+  height: 100vh;
   width: 100vw;
+  font-family: Open Sans, sans-serif;
 }
 
 /* Top section */
 
 .container-top {
   text-align: center;
-  height: 218px;
+  height: 250px;
   padding-top: 1.1rem;
   background-color: #E5F3F2;
 }
@@ -86,7 +87,6 @@ article {
   margin-right: 16.7vw;
   margin-top: 20px;
   color: #D1D3D4;
-
 }
 
 .inportance {
