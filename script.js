@@ -1,4 +1,3 @@
-
 $(window).on('load', restoreCard);
 $('form').on('keyup', verifyInput);
 $('.save').on('click', saveInput);
@@ -6,9 +5,9 @@ $('.container-bottom').on('blur', '.user-content', saveEditedCard);
 $('.container-bottom').on('click', '.upvote', upvoteChange);
 $('.container-bottom').on('click', '.downvote', downvoteChange);
 $('.container-bottom').on('click', '.delete-button-header', deleteCard);
-$('.container-bottom').on( "click", '.checkbox' , markCardCompleted);
+$('.container-bottom').on("change", '.checkbox' , markCardCompleted);
 $('.search').on('keyup', filterCards);
-
+$(window).on('load', showMore);
 
 function verifyInput() {
   var title = document.querySelector('.title');
@@ -29,6 +28,7 @@ function saveInput(e) {
   clearInput();
   prependCard(newCard);
   storeCard(newCard, newCard.id);
+  displayButton();
 };
 
 function prependCard(object) {
@@ -63,11 +63,12 @@ function filterCards() {
   }
 }
 
-function MakeCard(title, body, id, importance) {
+function MakeCard(title, body, id, importance, completed) {
   this.title = title;
   this.body = body;
-  this.id = id || Date.now();
-  this.importance = importance || 'importance: normal';
+  this.id = Date.now();
+  this.importance = importance || 2;
+  this.completed = false;
 };
 
 function storeCard(card, id) {
@@ -81,6 +82,7 @@ function restoreCard() {
     var parsedCard = JSON.parse(object);
     prependCard(parsedCard);
   }
+    displayButton();
 };
 
 function getCard(id) {
@@ -108,7 +110,7 @@ function saveEditedCard(e) {
 }
 
 function upvoteChange() {
-  var importance = 0;
+  var importance = 2;
   var qualityDisplay = ['importance: none','importance: low','importance: normal', 'importance: high', 'importance: critcal'];
   var id = $(this).closest('article').attr('id');
   var parseCard = getCard(id);
@@ -117,12 +119,11 @@ function upvoteChange() {
     $(this).closest('.importance-section').find('p')[0].innerText = qualityDisplay[importance];
     parseCard.importance = qualityDisplay[importance]
   }
-  console.log(parseCard);
+  console.log(importance);
   storeCard(parseCard, id);
 };
 
 function downvoteChange() {
-  var importance = 0;
   var qualityDisplay = ['importance: none','importance: low','importance: normal', 'importance: high', 'importance: critcal'];
   var id = $(this).closest('article').attr('id');
   var parseCard = getCard(id);
@@ -136,8 +137,22 @@ function downvoteChange() {
 };
 
 function markCardCompleted() {
-  var card = $(this).closest('article')
-  console.log(card)
-  card.addClass('completed');
+  var id = $(this).closest('article').attr('id');
+  var parseCard = getCard(id);
+  var card = $(this).closest('article');
+  card.toggleClass('completed');
+  parseCard.completed = !parseCard.completed
+  storeCard(parseCard, id);
+  console.log(parseCard.completed);
 }
 
+function displayButton() {
+  var button = $('.show-more');
+  if (localStorage.length >= 10) {
+    button.removeAttr('hidden');
+  }
+}
+
+function showMore() {
+  $('.container-bottom article').slice(0, 3).show;
+};
