@@ -53,7 +53,6 @@ function filterCards() {
   var cards = $('.cards');
   cards.each(function() {
     $(this).text().indexOf(input)
-    console.log($(this).text().indexOf(input))
     if ($(this).text().indexOf(input) > -1) {
       $(this).show();
     } else {
@@ -171,13 +170,19 @@ function showCompletedCards() {
 };  
 
 function sortByImportance() {
-  var cards = $('.cards')
-  var buttonText = $(this).text()
-    cards.each(function() {
-    if (cards.text().includes(buttonText)) {
-      cards.show();
+  var cards = $('.cards');
+  var buttonText = $(this).text();
+  cards.each(function() {
+    console.log($(this))
+    // $(this).text().indexOf(buttonText)
+    if ($(this).text().indexOf(buttonText) > -1) {
+      $(this).show();
     } else {
-      cards.hide();
+      $(this).hide();
     };
   });
 };
+
+
+    // $(this).text().indexOf(input)
+    // if ($(this).text().indexOf(input) > -1) {
