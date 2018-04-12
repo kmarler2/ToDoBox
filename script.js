@@ -42,7 +42,7 @@ function prependCard(object) {
     <section class='importance-section'>
     <img class="upvote" src="FEE-ideabox-icon-assets/upvote.svg" alt="" role="upvote button">
     <img class="downvote" src="FEE-ideabox-icon-assets/downvote.svg" alt="" role="downvote button">
-    <p class="importance">${object.importance}</p>
+    <p class="importance">importance: ${object.importance}</p>
     <p class="completed-checkbox">| completed</p>
     <input type="checkbox" class="checkbox">
    </article>`)
@@ -62,11 +62,11 @@ function filterCards() {
   });
 };
 
-function MakeCard(title, body, id, importance, completed) {
+function MakeCard(title, body, id, completed) {
   this.title = title;
   this.body = body;
   this.id = Date.now();
-  this.importance = importance || 'importance: normal';
+  this.importance = 'normal';
   this.completed = false;
 };
 
@@ -168,11 +168,10 @@ function showCompletedCards() {
 };  
 
 function sortByImportance() {
-  console.log($('.cards').text())
+  var cards = $('.cards')
   var buttonText = $(this).text()
-  var cards = $('.cards').text();
     cards.each(function() {
-    if (cards.includes(buttonText)) {
+    if (cards.text().includes(buttonText)) {
       cards.show();
     } else {
       cards.hide();
