@@ -8,7 +8,7 @@
 </head>
 <body>
   <section class="container-top">
-    <span class="title-one title">2do</span><span class="title-two title" id="test">box</span>
+    <h1 class="title-one title">2do</h1><h1 class="title-two title" id="test">box</h1>
     <form class="form">
       <label for="text" name="Title" value=""> </label>
       <input class="input title" type="" placeholder="Title" name="Title" aria-label="Add title of your new task!"><br>
@@ -20,11 +20,13 @@
   <main>
     <label for="text" name="Search" value=""></label>
     <input id='search' class="search" type="" placeholder="Search" name="Search">
-    <button class='none'>None</button>
-    <button class='low'>Low</button>
-    <button class='normal'>Normal</button>
-    <button class='high'>High</button>
-    <button class='critical'>Critical</button>
+    <section class="importance-button-bar">
+      <button class='sort-by-importance'>none</button>
+      <button class='sort-by-importance'>low</button>
+      <button class='sort-by-importance'>normal</button>
+      <button class='sort-by-importance'>high</button>
+      <button class='sort-by-importance'>critical</button>
+    </section>
     <section class="container-bottom">
     </section>
     <button class='show-completed'>show completed tasks
