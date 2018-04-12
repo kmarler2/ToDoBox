@@ -1,10 +1,8 @@
 body {
+  font-family: Open Sans, sans-serif;
   height: 100vh;
   width: 100vw;
-  font-family: Open Sans, sans-serif;
 }
-
-/* Top section */
 
 .container-top {
   background-color: #E5F3F2;
@@ -55,14 +53,10 @@ h1 {
   background-color: #045E55
 }
 
-/* Bottom section */
-
 .container-bottom {
   background-color: #FFFFFF;
   margin-top: 5rem auto 0 auto;
 }
-
-/* Search Bar */
 
 #search {
   border: 1px solid #939598;
@@ -74,8 +68,6 @@ h1 {
   padding-left: .5rem;
   width: 50vw;
 }
-
-/* Filter Buttons */
 
 .button-bar {
   display: flex;
@@ -95,8 +87,6 @@ h1 {
 .sort-by-importance:hover {
   background-color: #045E55
 }
-
-/* Cards */
 
 article {
   color: #D1D3D4;
@@ -148,8 +138,6 @@ p {
   margin: 1rem 0 .5rem 0;
 }
 
-/* Card Buttons */
-
 .delete-button-header {
   float: right;
 }
@@ -175,13 +163,9 @@ p {
   content: url(FEE-ideabox-icon-assets/downvote-hover.svg);
 }
 
-/* Card State */
-
 .completed {
   opacity: .3;
 }
-
-/* Show Read */
 
 .show-completed {
   background-color: #00A79D;
@@ -200,42 +184,39 @@ p {
 
 @media only screen and (max-width: 550px) {
 
-.input {
-  width: 80vw;
-}
+  .input {
+    width: 80vw;
+  }
 
-.save {
-  width: 80vw;
-}
+  .save {
+    width: 80vw;
+  }
 
-#search {
-  width: 80vw;
-}
+  #search {
+    width: 80vw;
+  }
 
-.button-bar {
-  width: 100vw;
-}
+  .button-bar {
+    width: 100vw;
+  }
 
-.sort-by-importance {
-   width: 20vw;
-}
-.cards {
-  width: 80vw;
-}
+  .sort-by-importance {
+    width: 20vw;
+  }
+  .cards {
+    width: 80vw;
+  }
 
-.show-completed {
-  width: 100vw;
-}
+  .show-completed {
+    width: 100vw;
+  }
 
-.downvote {
+  .downvote {
     margin-right: 10px;
     margin-left: 10px;
-}
+  }
 
-.h1 {
+  .h1 {
     font-size: 3em;
+  }
 }
-
-}
-
-

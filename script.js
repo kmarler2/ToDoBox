@@ -82,7 +82,8 @@ function restoreCard() {
     if (parsedCard.completed === false) {
       prependCard(parsedCard);
     }
-  }  displayButton();
+  }  
+  displayButton();
 };
 
 function getCard(id) {
@@ -107,7 +108,7 @@ function saveEditedCard(e) {
   parseCard.title = $(this).parent('article').children('#titleText').text();
   parseCard.body = $(this).parent('article').children('#bodyText').text();
   storeCard(parseCard, id);
-}
+};
 
 function upvoteChange() {
   var qualityDisplay = ['importance: none','importance: low','importance: normal', 'importance: high', 'importance: critcal'];
@@ -118,7 +119,8 @@ function upvoteChange() {
     importance++;
     $(this).closest('.importance-section').find('.importance').text(qualityDisplay[importance]);
     parseCard.importance = qualityDisplay[importance];
-  } storeCard(parseCard, id);
+  } 
+  storeCard(parseCard, id);
 };
 
 function downvoteChange() {
@@ -130,7 +132,8 @@ function downvoteChange() {
     importance--;
     $(this).closest('.importance-section').find('.importance').text(qualityDisplay[importance]);
     parseCard.importance = qualityDisplay[importance];
-  } storeCard(parseCard, id);
+  } 
+  storeCard(parseCard, id);
 };
 
 function markCardCompleted() {
@@ -140,14 +143,14 @@ function markCardCompleted() {
   card.toggleClass('completed');
   parseCard.completed = !parseCard.completed;
   storeCard(parseCard, id);
-}
+};
 
 function displayButton() {
   var button = $('.show-more');
   if (localStorage.length >= 10) {
     button.removeAttr('hidden');
-  }
-}
+  };
+};
 
 function showMore() {
   $('.container-bottom article').slice(0, 3).show;
@@ -163,8 +166,8 @@ function showCompletedCards() {
       prependCard(parsedCard);
       card.toggleClass('completed');
       button.prop('disabled', true);
-    } 
-  }
+    };
+  };
 };  
 
 function sortByImportance() {
@@ -175,6 +178,6 @@ function sortByImportance() {
       cards.show();
     } else {
       cards.hide();
-    }
+    };
   });
-}
+};
